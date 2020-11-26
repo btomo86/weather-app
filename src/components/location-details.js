@@ -12,12 +12,11 @@ const LocationDetails = (props) => {
   );
 };
 
+LocationDetails.defaultProps = { forecasts: undefined };
+
 LocationDetails.propTypes = {
-  location: PropTypes.objectOf({
-    city: PropTypes.string,
-    country: PropTypes.string,
-  }).isRequired,
-  forecasts: PropTypes.array.isRequired,
+  location: PropTypes.objectOf(PropTypes.any).isRequired,
+  forecasts: PropTypes.array,
 };
 
 export default LocationDetails;
