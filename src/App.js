@@ -22,22 +22,52 @@ const App = () => {
   };
 
   useEffect(() => {
-    const info = axios
-      .get("https://weather-app-alt.herokuapp.com/forecast")
+    async function fetchData() {
+      await axios
+        .get("https://weather-app-alt.herokuapp.com/forecast")
+        .then((response) => {
+          setForecasts(response.data.forecasts);
+          setLocation(response.data.location);
+        })
+        .catch((error) => {
+          if (error.response.status === 404) {
+            throw new Error("Page not found.");
+          } else if (error.response.status === 500) {
+            throw new Error("Server error. Please try again later.");
+          } else {
+            console.log(error.message);
+            throw new Error(
+              "Whoops, something has gone wrong...Please try again!"
+            );
+          }
+        });
+    }
 
-      .then((response) => {
-        setForecasts(response.data.forecasts);
-        setLocation(response.data.location);
-      });
+    fetchData();
   }, []);
 
   const locationSearch = (location) => {
-    axios
-      .get(`https://weather-app-alt.herokuapp.com/forecast?city=${location}`)
-      .then((response) => {
-        setForecasts(response.data.forecasts);
-        setLocation(response.data.location);
-      });
+    async function fetchData() {
+      await axios
+        .get(`https://weather-app-alt.herokuapp.com/forecast?city=${location}`)
+        .then((response) => {
+          setForecasts(response.data.forecasts);
+          setLocation(response.data.location);
+        })
+        .catch((error) => {
+          if (error.response.status === 404) {
+            alert("This city cannot be found. Please try a different city.");
+          } else if (error.response.status === 500) {
+            throw new Error("Server error. Please try again later.");
+          } else {
+            console.log(error.message);
+            throw new Error(
+              "Whoops, something has gone wrong... Please try again"
+            );
+          }
+        });
+    }
+    fetchData();
   };
 
   return (
