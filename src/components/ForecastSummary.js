@@ -4,7 +4,7 @@ import WeatherIcon from "react-icons-weather";
 import Moment from "moment";
 
 const ForecastSummary = (props) => {
-  const { date, temperature, description, icon, handleForecastSelect } = props;
+  const { date, temperature, description, icon } = props;
   console.log(icon);
   return (
     <h2>
