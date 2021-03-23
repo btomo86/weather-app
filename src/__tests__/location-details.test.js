@@ -10,3 +10,5 @@ it("renders the correct city and location props", () => {
   const { getByText } = render(<LocationDetails location={location} />);
   expect(getByText("Manchester, UK")).toHaveClass("location-details");
 });
+
+

@@ -1,8 +1,9 @@
 import React from "react";
 import ForecastSummary from "./ForecastSummary";
+import styled from "styled-components";
 
 const ForecastSummaries = (props) => (
-  <div className="forecast-summaries">
+  <ForecastContainer>
     {props.forecasts.map((forecast) => (
       <ForecastSummary
         key={forecast.date}
@@ -13,7 +14,16 @@ const ForecastSummaries = (props) => (
         onSelect={props.onSelect}
       />
     ))}
-  </div>
+  </ForecastContainer>
 );
 
+const ForecastContainer = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  align-content: center;
+  margin-bottom: 100px;
+  width: 100%;
+  height: 350px;
+  margin-top: 100px;
+`;
 export default ForecastSummaries;

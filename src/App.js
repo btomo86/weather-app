@@ -2,12 +2,11 @@ import React, { useEffect } from "react";
 import LocationDetails from "./components/location-details";
 import ForecastSummaries from "./components/forecast-summaries";
 import axios from "axios";
-
 import ForecastDetails from "./components/ForecastDetails";
-import "./styles/app.css";
-import "./styles/forecast-summaries.css";
+
 import { useState } from "react";
 import SearchForm from "./components/SearchForm";
+import GlobalStyle from "./components/GlobalStyles";
 
 const App = () => {
   const [selectedDate, setSelectedDate] = useState(0);
@@ -24,7 +23,7 @@ const App = () => {
   useEffect(() => {
     async function fetchData() {
       await axios
-        .get("https://weather-app-alt.herokuapp.com/forecast")
+        .get("https://mcr-codes-weather.herokuapp.com/forecast")
         .then((response) => {
           setForecasts(response.data.forecasts);
           setLocation(response.data.location);
@@ -49,7 +48,9 @@ const App = () => {
   const locationSearch = (location) => {
     async function fetchData() {
       await axios
-        .get(`https://weather-app-alt.herokuapp.com/forecast?city=${location}`)
+        .get(
+          `https://mcr-codes-weather.herokuapp.com/forecast?city=${location}`
+        )
         .then((response) => {
           setForecasts(response.data.forecasts);
           setLocation(response.data.location);
@@ -72,6 +73,7 @@ const App = () => {
 
   return (
     <div className="forecast">
+      <GlobalStyle />
       <LocationDetails location={location} />
       <SearchForm locationSearch={locationSearch} />
       <ForecastSummaries
